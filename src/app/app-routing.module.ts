@@ -11,6 +11,10 @@ const routes: Routes = [
   {
     path: 'books',
     loadChildren: () => import('./book/book.module').then(m => m.BookModule)
+  },
+  {
+    path: 'advance',
+    loadChildren: () => import('./advance-angular/advance-angular.module').then(m => m.AdvanceAngularModule)
   }
 ];
 

@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { AppConfig, APP_CONFIG } from 'src/app/app.module';
 import { addBook, removeBook, retrievedBookList } from 'src/app/store/action/books.action';
+import { AppState } from 'src/app/store/app.state';
 import { selectBookCollection, selectBooks } from 'src/app/store/selectors/books.selector';
 import { GoogleBooksService } from '../services/book.service';
 
@@ -23,8 +25,12 @@ export class BookComponent implements OnInit {
 
   constructor(
     private booksService: GoogleBooksService,
-    private store: Store
-  ) {}
+    private store: Store<AppState>,
+   @Inject(APP_CONFIG) config: AppConfig
+  ) {
+    console.table(config);
+    this.store.select((state)=> state.collection)
+  }
 
   ngOnInit() {
     this.booksService

@@ -1,4 +1,4 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, InjectionToken, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
@@ -10,6 +10,15 @@ import { StoreModule } from '@ngrx/store';
 import { booksReducer } from './store/reducers/books.reducer';
 import { collectionReducer } from './store/reducers/collection.reducer';
 
+export interface AppConfig {
+  title: string,
+  description: string
+}
+const ApplicationConfig: AppConfig = {
+  title: 'Angular App',
+  description: 'this is description'
+}
+export const APP_CONFIG = new InjectionToken<AppConfig>('app.config');
 @NgModule({
 
   imports: [
@@ -23,7 +32,9 @@ import { collectionReducer } from './store/reducers/collection.reducer';
   declarations: [
     AppComponent
   ],
-  providers: [],
+  providers: [
+    {provide: APP_CONFIG, useValue: ApplicationConfig}
+  ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })
