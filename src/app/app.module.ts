@@ -33,9 +33,12 @@ export const APP_CONFIG = new InjectionToken<AppConfig>('app.config');
     AppComponent
   ],
   providers: [
-    {provide: APP_CONFIG, useValue: ApplicationConfig}
+    {provide: APP_CONFIG, useValue: ApplicationConfig},
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+providers:[
+
+]
