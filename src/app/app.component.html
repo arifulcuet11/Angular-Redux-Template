@@ -1,2 +1,8 @@
-<router-outlet></router-outlet>
+<select (change)="onChange($event)">
+    <option value="en">English</option>
+    <option value="bn">Bangla</option>
+
+</select>
+
+<h1>{{'HOME.TITLE' | translate}}</h1>
 <router-outlet></router-outlet>
