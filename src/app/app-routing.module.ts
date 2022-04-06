@@ -1,21 +1,23 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AppComponent } from './app.component';
-import { BookComponent } from './book/book/book.component';
+import { LoginComponent } from './auth/login/login.component';
+import { AuthGuard } from './guard/auth.guard';
 
 const routes: Routes = [
   {
     path: '',
-    component: AppComponent
+    redirectTo: '/dashboard', 
+    pathMatch: 'full'
   },
   {
-    path: 'books',
-    loadChildren: () => import('./book/book.module').then(m => m.BookModule)
+    path: 'auth',
+    loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule),
   },
   {
-    path: 'advance',
-    loadChildren: () => import('./advance-angular/advance-angular.module').then(m => m.AdvanceAngularModule)
-  }
+    path: 'dashboard',
+    loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule),
+    canActivate: [AuthGuard],
+  },
 ];
 
 @NgModule({

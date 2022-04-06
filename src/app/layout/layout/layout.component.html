@@ -1,0 +1,11 @@
+<app-header></app-header>
+<mat-drawer-container class="example-container" autosize>
+    <mat-drawer #drawer class="example-sidenav" mode="side" [opened]="isSidebarOpen">
+        <app-sidebar></app-sidebar>
+    </mat-drawer>
+  
+    <div class="example-sidenav-content">
+      <ng-content></ng-content>
+    </div>
+  
+  </mat-drawer-container>

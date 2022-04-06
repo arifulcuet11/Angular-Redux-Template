@@ -11,6 +11,11 @@ import { booksReducer } from './store/reducers/books.reducer';
 import { collectionReducer } from './store/reducers/collection.reducer';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ApplicationConstant, APP_CONSTANT } from './share/app-config/app.constant';
+import { ButtonComponent } from './share/components/button/button.component';
+import { LayoutModule } from './layout/layout.module';
+import { layoutReducer } from './store/reducers/layout.reducer';
 
 export interface AppConfig {
   title: string,
@@ -37,27 +42,31 @@ export function createTranslateLoader(http: HttpClient) {
     AppRoutingModule,
     HttpClientModule,
     BookModule,
-    StoreModule.forRoot({ books: booksReducer, collection: collectionReducer }),
+    StoreModule.forRoot({
+      books: booksReducer,
+      collection: collectionReducer,
+      layout: layoutReducer
+    }),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     TranslateModule.forRoot({
-      loader:{
+      loader: {
         provide: TranslateLoader,
         useFactory: createTranslateLoader,
         deps: [HttpClient]
       },
       defaultLanguage: 'en'
-    })
+    }),
+    BrowserAnimationsModule,
+    LayoutModule
   ],
   declarations: [
     AppComponent
   ],
   providers: [
     { provide: APP_CONFIG, useValue: ApplicationConfig },
+    { provide: APP_CONSTANT, useValue: ApplicationConstant },
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
-providers: [
-
-]
